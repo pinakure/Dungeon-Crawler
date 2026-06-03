@@ -1,0 +1,17 @@
+networks:
+  proxy_sql-network:
+    external: true
+  proxy_primary-network:
+    external: true
+
+services:
+  dungeon-service:
+    image: nginx:alpine
+    container_name: dungeon
+    hostname: dungeon
+    networks:
+      - proxy_sql-network
+      - proxy_primary-network
+    volumes:
+      - /src/dungeon/web:/usr/share/nginx/html:ro
+    restart: unless-stopped

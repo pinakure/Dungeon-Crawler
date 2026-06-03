@@ -1,0 +1,204 @@
+:root {
+	--viewport-size 	: 512px;	
+	 --transition-type 	: transform 128ms, opacity 100ms ; 
+}
+
+html {
+	height			: 100%;
+	width			: 100%;
+	
+}
+body {
+	margin			: 0px 0px 0px 0px;
+	height			: 100%;
+	width			: 100%;
+	background		: linear-gradient(17deg, #f0f0f0, #a0a0a0);
+	overflow		: hidden;
+}
+
+*{
+	image-rendering		: pixelated;
+}
+scenewrapper {
+	/* zoom			: 1.5; */
+	position		: absolute;
+	top				: 0spx;
+	left			: calc(50% - 256px);
+	display			: inline-block;
+	height			: var(--viewport-size);
+	width			: var(--viewport-size);
+	overflow		: hidden;
+	background 		: #000000;
+	-webkit-perspective: 256px; /* For compatibility with iPhone 3.0, we leave off the units here */
+	-webkit-perspective-origin: 256px 256px;
+}
+
+scene{
+	display			: inline-block;
+	height			: var(--viewport-size);
+	position		: absolute;
+	width			: var(--viewport-size);
+	transition 		: var(--transition-type);
+	-webkit-transform-style: preserve-3d;
+}
+
+
+wall {
+	position		: absolute;
+	display			: inline-block;
+	width			: 50%;
+	height			: 100%;
+	-webkit-transform-style: preserve-3d;
+	background-image: url('wall.jpg');
+	background-size : 50% 100%;
+	background-repeat: repeat-x;
+	
+}
+
+ground {
+	position		: absolute;
+	display			: inline-block;
+	top				: 50%;
+	left			: 25%;
+	height			: 50%;
+	width			: 50%;
+	-webkit-transform-style: preserve-3d;	
+	transform 		: rotateX(-90deg);
+	background-image: url('ground.jpg');
+	background-size : 100% 50%;
+	background-repeat: no-repeat repeat-y;
+	transition 		: var(--transition-type);
+}
+
+ceiling {
+	position		: absolute;
+	display			: inline-block;
+	top				: 0%;
+	height			: 50%;
+	left			: 25%;
+	width			: 50%;
+	-webkit-transform-style: preserve-3d;	
+	transform 		: rotateX(-90deg);
+	background-image: url('ceiling.png');
+	background-size : 100% 50%;
+	background-repeat: no-repeat repeat-y;
+	transition 		: var(--transition-type);
+}
+
+.wall1 			{ background-image: url('wall1.jpg');		 }
+.wall2 			{ background-image: url('wall2.jpg');		 }
+.wall3 			{ background-image: url('wall3.jpg');		 }
+.ground1 		{ background-image: url('ground1.jpg');		 }
+.ground2 		{ background-image: url('ground2.jpg');		 }
+.ground3 		{ background-image: url('ground3.jpg');		 }
+
+wall.left 		{ left		: 0%;  top: 128px; height: 256px;}
+wall.right		{ left		: 50%; top: 128px; height: 256px;}
+
+wall.far.rotate.right	 	{ opacity: 0; top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(128px) translateZ(-512px) !important; }
+wall.back.rotate.right	 	{ opacity: 0; top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(128px) translateZ(-380px) !important; }
+wall.current.rotate.right 	{ top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(128px) translateZ(-128px) !important; }
+wall.front.rotate.right	 	{ top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(128px) translateZ( 128px) !important; }
+wall.close.rotate.right	 	{ top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(128px) translateZ(-380px) !important; }
+wall.far.rotate.left	 	{ opacity: 0; left: calc(-200% + 256px); top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(-128px) translateZ(-512px) !important; }
+wall.back.rotate.left	 	{ opacity: 0; left: calc(-200% + 256px); top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(-128px) translateZ(-380px) !important; }
+wall.current.rotate.left 	{ left: calc(-200% + 256px); top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(-128px) translateZ(-128px) !important; }
+wall.front.rotate.left	 	{ left: calc(-200% + 256px); top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(-128px) translateZ( 128px) !important; }
+wall.close.rotate.left	 	{ left: calc(-200% + 256px); top: 128px; height: 512px; background-size: 25% 50%; width: 200%; transform: 	translateX(-128px) translateZ(-380px) !important; }
+ceiling.rotate				{ left: -512px; width: 2048px; background-size: 12.5% 50%;}
+ground.rotate				{ left: -512px; width: 2048px; background-size: 12.5% 50%;}
+
+
+ground.beyond,
+ceiling.beyond,
+wall.beyond				 	{ opacity: 0; transition: none !important; display: none !important; transform: translateX(768px) ;	}
+
+ground.far,
+ceiling.far					{ opacity: 0; transform : rotateX(-90deg) translateY(512px) ;	}
+wall.far.left				{ opacity: 0; transform : rotateY(90deg) translateX(512px) ;	}
+wall.far.right				{ opacity: 0; transform : rotateY(-90deg) translateX(-512px) ;	}
+
+ground.back,	
+ceiling.back 				{ opacity: 1; transform : rotateX(-90deg) translateY(256px) ;	}
+wall.back.left				{ opacity: 1; transform	: rotateY(90deg) translateX(256px) ;	}
+wall.back.right				{ opacity: 1; transform	: rotateY(-90deg) translateX(-256px) ;	}
+
+ground.current,
+ceiling.current 			{ transform : rotateX(-90deg) translateY(0px) ;		}
+wall.current.left 			{ transform	: rotateY(90deg) translateX(0px) ;		}
+wall.current.right			{ transform	: rotateY(-90deg) translateX(0px) ;		}
+
+ground.front,
+ceiling.front				{ transform : rotateX(-90deg) translateY(-256px) ;	}
+wall.front.left				{ transform : rotateY(90deg) translateX(-256px) ;	}
+wall.front.right			{ transform : rotateY(-90deg) translateX(256px) ;	}
+
+ground.close,
+ceiling.close,
+wall.close 					{ transition: none !important; display: none !important; transform: translateX(-512px) ;	}
+
+
+curtain{ 
+	background 		: #fff000;
+	-webkit-transform-style: preserve-3d;	
+	display			: inline-block;
+	position		: absolute;
+	box-sizing		: border-box;
+}
+
+curtain.up,
+curtain.down{
+	height 			: 50%;
+	width			: 400%;	
+	left			: -100%;
+	background		: linear-gradient(180deg, #00000000, #00000000, #00000000, #000000ff);
+}
+
+curtain.left ,
+curtain.right{
+	height 			: 100%;
+	width			: 50%;	
+	top				: 0%;
+	background		: linear-gradient(90deg, #00000000, #00000000, #00000000, #000000ff);
+}
+
+img:hover {
+	background: #fff000;
+}
+
+curtain.backdrop {
+	left			: -100%;
+	top				: -100%;
+	height			: 200%; 
+	width			: 400%; 
+	background		:#000000;
+	transform		: translateZ(-256px);
+	box-shadow		: 0px 0px 64px #000;
+}
+
+curtain.up 		{ top			: 0%;	transform 	: rotateX(-89deg) 	translateY(128px) ;}
+curtain.down	{ bottom		: 0%;	transform	: rotateX(-91deg) 	translateY(128px) ;}
+curtain.left 	{ left			: 0%;	transform 	: rotateY(89deg) 	translateX(128px) ;}
+curtain.right 	{ right			: 0%;	transform 	: rotateY(91deg) 	translateX(128px) ;} 
+
+cube {
+	display			: inline-block;
+	position		: absolute;
+	box-sizing		: border-box;
+	transform-style	: preserve-3d;
+	color			: #0fa;
+	backface-visibility: hidden;
+}
+
+face {
+	display			: inline-block;
+	position		: absolute;
+	box-sizing		: border-box;
+	/* border 			: 1px solid #0f08; */
+	/* background 		: #ffff00; */
+	text-align		: center;
+	line-height 	: 512px;
+	font-size 		: 512px;
+	color			: #f302;
+	vertical-align	: middle;
+}
